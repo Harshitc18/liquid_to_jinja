@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid to Jinja Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <i class="fas fa-code"></i>
+                    Liquid to Jinja Converter
+                </h1>
+                <p class="subtitle">Convert your Liquid templates to Jinja2 format with ease</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="converter-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2>
+                            <i class="fab fa-shopify"></i>
+                            Liquid Code
+                        </h2>
+                        <div class="section-actions">
+                            <button id="clearInput" class="btn btn-secondary">
+                                <i class="fas fa-trash"></i>
+                                Clear
+                            </button>
+                            <button id="loadExample" class="btn btn-secondary">
+                                <i class="fas fa-lightbulb"></i>
+                                Example
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-container">
+                        <textarea id="liquidInput" placeholder="Paste your Liquid template code here...
+
+Example:
+{%- raw -%}
+{% assign user_name = 'John Doe' %}
+{% if user_name contains 'John' %}
+  <h1>Hello {{ user_name | upcase }}!</h1>
+{% endif %}
+
+{% for product in products %}
+  <p>{{ product.title | truncate: 50 }}</p>
+{% endfor %}
+{%- endraw -%}"></textarea>
+                        <div class="code-info">
+                            <span id="inputLines">0 lines</span>
+                            <span id="inputChars">0 characters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="convert-section">
+                    <button id="convertBtn" class="btn btn-primary convert-btn">
+                        <i class="fas fa-exchange-alt"></i>
+                        Convert to Jinja
+                    </button>
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <div class="section-header">
+                        <h2>
+                            <i class="fas fa-flask"></i>
+                            Jinja2 Code
+                        </h2>
+                        <div class="section-actions">
+                            <button id="copyOutput" class="btn btn-secondary">
+                                <i class="fas fa-copy"></i>
+                                Copy
+                            </button>
+                            <button id="downloadOutput" class="btn btn-secondary">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-container">
+                        <pre id="jinjaOutput" class="language-django"><code>Your converted Jinja2 code will appear here...</code></pre>
+                        <div class="code-info">
+                            <span id="outputLines">0 lines</span>
+                            <span id="outputChars">0 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h3>Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-magic"></i>
+                        <h4>Smart Conversion</h4>
+                        <p>Automatically converts Liquid syntax to Jinja2 with intelligent pattern matching</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-filter"></i>
+                        <h4>Filter Support</h4>
+                        <p>Handles complex filters like truncate, split, date formatting, and more</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>Control Structures</h4>
+                        <p>Converts loops, conditions, case statements, and variable assignments</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user-cog"></i>
+                        <h4>Custom Attributes</h4>
+                        <p>Transforms custom attributes and user data references automatically</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Liquid to Jinja Converter. Built with Python & Flask.</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Code copied to clipboard!</span>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Conversion Error</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modal-close">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
